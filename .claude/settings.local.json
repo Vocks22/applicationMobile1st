@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"C:\\Users\\Leyrissoux\\.claude\" /a)",
+      "Bash(find:*)",
+      "Bash(flutter --version:*)",
+      "Bash(where:*)",
+      "Bash(/d/dev/flutter/bin/flutter:*)",
+      "Bash(setx PATH \"%PATH%;D:\\dev\\flutter\\bin\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
