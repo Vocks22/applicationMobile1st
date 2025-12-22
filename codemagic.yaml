@@ -1,17 +1,18 @@
 workflows:
   android-workflow:
-    name: Android Build
+    name: Android Release Build
     max_build_duration: 60
+    instance_type: mac_mini_m2
     environment:
       flutter: stable
       android_signing:
-        - keystore_reference  # A configurer plus tard
+        - infia_keystore
     scripts:
       - name: Get Flutter packages
-        script: flutter packages get
-      - name: Build APK
+        script: flutter pub get
+      - name: Build APK Release
         script: flutter build apk --release
-      - name: Build App Bundle
+      - name: Build App Bundle Release
         script: flutter build appbundle --release
     artifacts:
       - build/**/outputs/**/*.apk
@@ -25,25 +26,31 @@ workflows:
           failure: true
 
   ios-workflow:
-    name: iOS Build
-    max_build_duration: 60
-    instance_type: mac_mini_m1
+    name: iOS Release Build
+    max_build_duration: 90
+    instance_type: mac_mini_m2
     environment:
       flutter: stable
       xcode: latest
       cocoapods: default
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.infia.app_mobile_1st
     scripts:
       - name: Get Flutter packages
-        script: flutter packages get
+        script: flutter pub get
       - name: Install CocoaPods dependencies
+        script: cd ios && pod install
+      - name: Setup iOS signing
         script: |
-          cd ios
-          pod install
-      - name: Build iOS
-        script: flutter build ios --release --no-codesign
+          keychain initialize
+          app-store-connect fetch-signing-files com.infia.app_mobile_1st --type IOS_APP_STORE --create
+          keychain add-certificates
+          xcode-project use-profiles
+      - name: Build iOS IPA
+        script: flutter build ipa --release --export-options-plist=/Users/builder/export_options.plist
     artifacts:
       - build/ios/ipa/*.ipa
-      - build/ios/archive/*.xcarchive
     publishing:
       email:
         recipients:
@@ -51,5 +58,7 @@ workflows:
         notify:
           success: true
           failure: true
-
-  # Windows build via GitHub Actions (Codemagic ne supporte pas Windows)
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
+        submit_to_app_store: false
