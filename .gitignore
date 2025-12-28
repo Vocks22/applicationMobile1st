@@ -43,3 +43,11 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Android signing keys (sensitive)
+android/key.properties
+*.jks
+*.keystore
+
+# PSD files (too large for git)
+*.psd
