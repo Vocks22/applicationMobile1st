@@ -89,10 +89,18 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                 // Points forts
                 _buildFeatureCard(
                   context,
+                  Icons.quiz,
+                  'Quiz Maturité IA',
+                  'Évaluez votre niveau en 2 minutes',
+                  onTap: () => MainNavigation.navigateTo(context, 1),
+                ),
+                const SizedBox(height: 16),
+                _buildFeatureCard(
+                  context,
                   Icons.search,
                   'Audit IA',
                   'Evaluation de votre maturite IA',
-                  onTap: () => MainNavigation.navigateTo(context, 1),
+                  onTap: () => MainNavigation.navigateTo(context, 2),
                 ),
                 const SizedBox(height: 16),
                 _buildFeatureCard(
@@ -100,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   Icons.school,
                   'Formation',
                   'Programmes sur-mesure pour vos equipes',
-                  onTap: () => MainNavigation.navigateTo(context, 1),
+                  onTap: () => MainNavigation.navigateTo(context, 2),
                 ),
                 const SizedBox(height: 16),
                 _buildFeatureCard(
@@ -108,7 +116,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                   Icons.auto_awesome,
                   'Automatisation',
                   'Solutions IA cle en main',
-                  onTap: () => MainNavigation.navigateTo(context, 1),
+                  onTap: () => MainNavigation.navigateTo(context, 2),
                 ),
                 const SizedBox(height: 40),
               ],

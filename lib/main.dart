@@ -4,6 +4,7 @@ import 'screens/services_screen.dart';
 import 'screens/stats_screen.dart';
 import 'screens/contact_screen.dart';
 import 'screens/about_screen.dart';
+import 'screens/quiz_screen.dart';
 
 void main() {
   runApp(const InfIAApp());
@@ -62,10 +63,10 @@ class _MainNavigationState extends State<MainNavigation> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
+    QuizScreen(),
     ServicesScreen(),
     StatsScreen(),
     ContactScreen(),
-    AboutScreen(),
   ];
 
   @override
@@ -89,6 +90,11 @@ class _MainNavigationState extends State<MainNavigation> {
             label: 'Accueil',
           ),
           NavigationDestination(
+            icon: Icon(Icons.quiz_outlined),
+            selectedIcon: Icon(Icons.quiz),
+            label: 'Quiz IA',
+          ),
+          NavigationDestination(
             icon: Icon(Icons.business_outlined),
             selectedIcon: Icon(Icons.business),
             label: 'Services',
@@ -96,17 +102,12 @@ class _MainNavigationState extends State<MainNavigation> {
           NavigationDestination(
             icon: Icon(Icons.insights_outlined),
             selectedIcon: Icon(Icons.insights),
-            label: 'IA Stats',
+            label: 'Stats',
           ),
           NavigationDestination(
             icon: Icon(Icons.mail_outlined),
             selectedIcon: Icon(Icons.mail),
             label: 'Contact',
-          ),
-          NavigationDestination(
-            icon: Icon(Icons.info_outlined),
-            selectedIcon: Icon(Icons.info),
-            label: 'A propos',
           ),
         ],
       ),
